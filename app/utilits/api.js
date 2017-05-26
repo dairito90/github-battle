@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const id = 'b685a81b6e0a5b9dec97';
-const sec = 'cb7dfe858c5fcbc01f92e11c80a9647bf281bc40';
+const id = 'b4ce2d7299966c6d0947';
+const sec = '87475d0c78f154fb8ce9aafdc6503e73629de530';
 const params = `?client_id=${id}&client_secret=&{sec}`;
 
 function getProfile(username) {
