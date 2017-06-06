@@ -4,13 +4,14 @@ import queryString from 'query-string';
 import api from '../utilits/api';
 import { Link } from 'react-router-dom';
 import PlayerPreview from './PlayerPreview';
+import Loading from './Loading';
 
 function Profile(props) {
-  console.log(props);
   const info = props.info;
-  return(
+
+  return (
     <PlayerPreview avatar={info.avatar_url} username={info.login}>
-      <ul className="space-list-items">
+      <ul className='space-list-items'>
         {info.name && <li>{info.name}</li>}
         {info.location && <li>{info.location}</li>}
         {info.company && <li>{info.company}</li>}
@@ -30,9 +31,9 @@ Profile.propTypes = {
 function Player(props) {
   return (
     <div>
-      <h1 className="header">{props.label}</h1>
+      <h1 className='header'>{props.label}</h1>
       <h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
-      <Profile info={props.profile}></Profile>
+      <Profile info={props.profile}/>
     </div>
   );
 }
@@ -64,9 +65,9 @@ class Results extends React.Component {
       if (results === null) {
         return this.setState(() => {
           return {
-          error: 'Looks like thre was an error. Check that both users exist on Github',
-          loading: false
-         }
+            error: 'Looks like there was an error. Check that both users exist on Github',
+            loading: false
+          }
         });
       }
 
@@ -86,11 +87,11 @@ class Results extends React.Component {
     const loser = this.state.loser;
     const loading = this.state.loading;
 
-    if(loading === true) {
-      return <p>loading</p>;
+    if (loading === true) {
+      return <Loading />;
     }
 
-    if(error) {
+    if (error) {
       return (
         <div>
           <p>{error}</p>
@@ -98,19 +99,20 @@ class Results extends React.Component {
         </div>
       );
     }
+
     return (
-      <div className="row">
-        <Player>
-          label='Winner'
+      <div className='row'>
+        <Player
+          label="Winner"
           score={winner.score}
           profile={winner.profile}
-        </Player>
+        />
 
-        <Player>
-          label='Loser'
+        <Player
+          label="Loser"
           score={loser.score}
           profile={loser.profile}
-        </Player>
+        />
       </div>
     );
   }

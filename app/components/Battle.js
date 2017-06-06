@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PlayerPreview from './PlayerPreview';
 
@@ -10,6 +10,7 @@ class PlayerInput extends React.Component {
     this.state = {
       username: ''
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -30,9 +31,8 @@ class PlayerInput extends React.Component {
       this.state.username
     )
   }
-
   render() {
-    return (
+    return(
       <form className='column' onSubmit={this.handleSubmit}>
         <label className='header' htmlFor='username'>
           {this.props.label}
@@ -57,9 +57,9 @@ class PlayerInput extends React.Component {
 }
 
 PlayerInput.propTypes = {
-  id: propTypes.string.isRequired,
-  label: propTypes.string.isRequired,
-  onSubmit: propTypes.func.isRequired
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 class Battle extends React.Component {
@@ -72,8 +72,9 @@ class Battle extends React.Component {
       playerOneImage: null,
       playerTwoImage: null
     }
-    this.handleReset = this.handleReset.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
   handleSubmit(id, username) {
     this.setState(function() {
@@ -101,37 +102,38 @@ class Battle extends React.Component {
     return (
       <div>
         <div className='row'>
-        {!playerOneName &&
-          <PlayerInput
-            id='playerOne'
-            label='Player One'
-            onSubmit={this.handleSubmit}
-            />}
-
-              {playerOneImage !== null &&
-                <PlayerPreview
-                  avatar={playerOneImage}
-                  username={playerOneName}
-                  >
-                  <button
-                    className='reset'
-                    onClick={this.handleReset.bind(null, 'playerOne')}>
-                      Reset
-                  </button>
-                </PlayerPreview>}
-
-            {!playerTwoName &&
+          {!playerOneName &&
             <PlayerInput
-            id='playerTwo'
-            label='Player Two'
-            onSubmit={this.handleSubmit}
+              id='playerOne'
+              label='Player One'
+              onSubmit={this.handleSubmit}
             />}
 
-              {playerTwoImage !== null &&
+          {playerOneImage !== null &&
+            <PlayerPreview
+              avatar={playerOneImage}
+              username={playerOneName}
+            >
+              <button
+                className='reset'
+                onClick={this.handleReset.bind(null, 'playerOne')}>
+                  Reset
+              </button>
+            </PlayerPreview>
+          }
+
+          {!playerTwoName &&
+            <PlayerInput
+              id='playerTwo'
+              label='Player Two'
+              onSubmit={this.handleSubmit}
+            />}
+
+            {playerTwoImage !== null &&
               <PlayerPreview
                 avatar={playerTwoImage}
                 username={playerTwoName}
-                >
+              >
                 <button
                   className='reset'
                   onClick={this.handleReset.bind(null, 'playerTwo')}>
@@ -139,16 +141,16 @@ class Battle extends React.Component {
                 </button>
               </PlayerPreview>
             }
-          </div>
+        </div>
 
         {playerOneImage && playerTwoImage &&
           <Link
-          className='button'
-          to={{
-            pathname: match.url + '/results',
-            search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
-          }}>
-          Battle
+            className='button'
+            to={{
+              pathname: match.url + '/results',
+              search: '?playerOneName=' + playerOneName + '&playerTwoName=' + playerTwoName
+            }}>
+              Battle
           </Link>
         }
       </div>

@@ -15,7 +15,7 @@ function Nav() {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName='active' to='/Popular'>
+        <NavLink activeClassName='active' to='/popular'>
           Popular
         </NavLink>
       </li>
